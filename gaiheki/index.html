@@ -2,11 +2,15 @@
 
 <!---------------------------------------------------------------
   Gaiheki
-  imoutooo (https://github.com/imoutooo)
+  by imoutooo (https://github.com/imoutooo)
   
   Resources
+  x Background graphics: /images/clouds.png
+                         /images/stars.png
+    by Nicalis (http://www.nicalis.com/)                  
+  
   x SmoothScroll.js (https://gist.github.com/galambalazs/6477177)
-    galambalazs (https://github.com/galambalazs)
+    by galambalazs (https://github.com/galambalazs)
   -------------------------------------------------------------->
 
 <html>
@@ -23,6 +27,7 @@
         <meta name="text:Text 2" content="Text 2" />
         <meta name="text:Note Units" content="notes" />
         <script src="http://static.tumblr.com/hbypfc2/8WVnpqov5/smoothscroll.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
         <style>
             a,abbr,acronym,address,applet,b,big,blockquote,body,caption,center,cite,code,dd,del,dfn,div,dl,dt,em,fieldset,font,form,h1,h2,h3,h4,h5,h6,html,i,iframe,img,ins,kbd,label,legend,li,object,ol,p,pre,q,s,samp,small,span,strike,strong,sub,sup,table,tbody,td,tfoot,th,thead,tr,tt,u,ul,var{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:0 0}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}:focus{outline:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
             
@@ -87,7 +92,7 @@
                 display: block;
                 -ms-interpolation-mode: bicubic;
                 image-rendering: auto;
-                margin: 0 auto;
+                margin: 0 auto;z
                 width: 128px;
                 height: 128px;
             }
@@ -129,7 +134,7 @@
             #text_1
             {
                 border-bottom: 1px solid {color:Color 3};
-                margin-top: 8px;
+                margin-top: 4px;
                 padding-bottom: 4px;
                 text-align: right;
             }
@@ -250,6 +255,37 @@
             }
             
             .post_footer:hover { background: {color:Color 4} }
+            
+            #pagination
+            {
+                font-size: 14px;
+                line-height: 14px;
+                margin-top: -12px;
+                text-align: center;
+            }
+            
+            #pagination_current
+            {
+                background: {color:Color 3};
+                color: {color:Color 1};
+                font-weight: bold
+            }
+            
+            .pagination_link
+            {
+                background: {color:Color 2};
+                border: 1px solid {color:Color 3};
+                display: inline-block;
+                margin-left: 12px;
+                padding: 8px;
+                -moz-transition: background 250ms ease-out;
+                -o-transition: background 250ms ease-out;
+                -webkit-transition: background 250ms ease-out;
+                transition: background 250ms ease-out;
+                vertical-align: middle;
+            }
+            
+            .pagination_link:hover { background: {color:Color 4} }
             
             #background_footer
             {
@@ -427,6 +463,11 @@
                         </div>
                     </div>
                 {/block:Posts}
+                {block:Pagination}
+                    <div id="pagination">
+                        {block:PreviousPage}<a href="{PreviousPage}" class="pagination_link">Back</a>{/block:PreviousPage}{block:JumpPagination length="5"}{block:CurrentPage}<a id="pagination_current" class="pagination_link">{PageNumber}</a>{/block:CurrentPage}{block:JumpPage}<a href="{URL}" class="pagination_link">{PageNumber}</a>{/block:JumpPage}{/block:JumpPagination}{block:NextPage}<a href="{NextPage}" class="pagination_link">Next</a>{/block:NextPage}
+                    </div>
+                {/block:Pagination}
             </div>
         </div>
         <div id="background_footer"></div>
