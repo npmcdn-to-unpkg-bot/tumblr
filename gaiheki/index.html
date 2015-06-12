@@ -2,12 +2,12 @@
 
 <!---------------------------------------------------------------
   Gaiheki
-  by imoutooo (https://github.com/imoutooo)
+  imoutooo (https://github.com/imoutooo)
   
   Resources
   x Background graphics: /images/clouds.png
                          /images/stars.png
-    by Nicalis (http://www.nicalis.com/)                  
+    by Nicalis (http://www.nicalis.com/                  
   
   x SmoothScroll.js (https://gist.github.com/galambalazs/6477177)
     by galambalazs (https://github.com/galambalazs)
@@ -23,6 +23,7 @@
         <meta name="color:Color 2" content="#bad0f1" />
         <meta name="color:Color 3" content="#101b2c" />
         <meta name="color:Color 4" content="#97b8e9" />
+        <meta name="font:Font Family" content="Verdana, Geneva, sans-serif" />
         <meta name="text:Text 1" content="Text 1" />
         <meta name="text:Text 2" content="Text 2" />
         <meta name="text:Note Units" content="notes" />
@@ -41,7 +42,7 @@
             {
                 background: #000 url('{image:Background}') left top/contain repeat fixed;
                 color: {color:Color 3};
-                font: 10px Verdana, Geneva, sans-serif;
+                font: 10px {font:Font Family};
                 -ms-interpolation-mode: nearest-neighbor;
                 image-rendering: -moz-crisp-edges;
                 image-rendering: -o-crisp-edges;
@@ -92,7 +93,7 @@
                 display: block;
                 -ms-interpolation-mode: bicubic;
                 image-rendering: auto;
-                margin: 0 auto;z
+                margin: 0 auto;
                 width: 128px;
                 height: 128px;
             }
@@ -162,7 +163,18 @@
 
             .post
             {
-                margin-bottom: 32px;
+                {block:IndexPage}
+                    margin-bottom: 32px;
+                {/block:IndexPage}
+                {block:PermalinkPage}
+                    position: absolute;
+                    top: 50%;
+                    -moz-transform: translateY(-50%);
+                    -ms-transform: translateY(-50%);
+                    -o-transform: translateY(-50%);
+                    -webkit-transform: translateY(-50%);
+                    transform: translateY(-50%);
+                {/block:PermalinkPage}
                 width: inherit;
             }
             
@@ -316,6 +328,10 @@
                 position: fixed;
                 top: 50%;
                 left: 50%;
+                -moz-transform: translateX(-50%) translateY(-50%);
+                -ms-transform: translateX(-50%) translateY(-50%);
+                -o-transform: translateX(-50%) translateY(-50%);
+                -webkit-transform: translateX(-50%) translateY(-50%);
                 transform: translateX(-50%) translateY(-50%);
                 width: 500px;
                 height: 210px;
@@ -476,12 +492,36 @@
             <div id="ask_gate" onclick="askHide()"></div>
         </div>
         <script>
+            {block:Pagination}
+                function navigate(event)
+                {
+                    event = event || window.event;
+                    
+                    switch(event.keyCode)
+                    {
+                        {block:PreviousPage}
+                            case 37:
+                                location.assign("{PreviousPage}");
+                                break;
+                        {/block:PreviousPage}
+                            
+                        {block:NextPage}
+                            case 39:
+                                location.assign("{NextPage}");
+                                break;
+                        {/block:NextPage}
+                    }
+                }
+                
+                document.onkeydown = navigate;
+            {/block:Pagination}
+        
             var ask      = document.getElementById("ask"),
                 ask_gate = document.getElementById("ask_gate");
         
             function askShow()
             {
-                ask_gate.style.opacity       = 0.25;
+                ask_gate.style.opacity       = 0.5;
                 ask_gate.style.pointerEvents = "auto"
                 ask.style.opacity            = 1;
                 ask.style.pointerEvents      = "auto"
