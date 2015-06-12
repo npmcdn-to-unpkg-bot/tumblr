@@ -1,0 +1,485 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!---------------------------------------------------------------
+  Gaiheki
+  imoutooo (https://github.com/imoutooo)
+  
+  Resources
+  x SmoothScroll.js (https://gist.github.com/galambalazs/6477177)
+    galambalazs (https://github.com/galambalazs)
+  -------------------------------------------------------------->
+
+<html>
+    <head>
+        <title>Title</title>
+        <meta name="image:Background" content="" />
+        <meta name="image:Background Footer" content="" />
+        <meta name="image:Avatar" content="" />
+        <meta name="color:Color 1" content="#dce7f8" />
+        <meta name="color:Color 2" content="#bad0f1" />
+        <meta name="color:Color 3" content="#101b2c" />
+        <meta name="color:Color 4" content="#97b8e9" />
+        <meta name="text:Text 1" content="Text 1" />
+        <meta name="text:Text 2" content="Text 2" />
+        <meta name="text:Note Units" content="notes" />
+        <script src="http://static.tumblr.com/hbypfc2/8WVnpqov5/smoothscroll.js"></script>
+        <style>
+            a,abbr,acronym,address,applet,b,big,blockquote,body,caption,center,cite,code,dd,del,dfn,div,dl,dt,em,fieldset,font,form,h1,h2,h3,h4,h5,h6,html,i,iframe,img,ins,kbd,label,legend,li,object,ol,p,pre,q,s,samp,small,span,strike,strong,sub,sup,table,tbody,td,tfoot,th,thead,tr,tt,u,ul,var{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:0 0}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}:focus{outline:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+            
+            a:link, a:visited, a:hover, a:active
+            {
+                color: inherit;
+                text-decoration: none;
+            }
+        
+            body
+            {
+                background: #000 url('{image:Background}') left top/contain repeat fixed;
+                color: {color:Color 3};
+                font: 10px Verdana, Geneva, sans-serif;
+                -ms-interpolation-mode: nearest-neighbor;
+                image-rendering: -moz-crisp-edges;
+                image-rendering: -o-crisp-edges;
+                image-rendering: pixelated;
+            }
+            
+            #main
+            {
+                margin: 0 auto;
+                width: 700px;
+            }
+            
+            #sidebar, #posts
+            {
+                display: inline-block;
+                vertical-align: top;
+            }
+            
+            #sidebar
+            {
+                padding-right: 26px;
+                width: 130px;
+            }
+            
+            .container
+            {
+                background: {color:Color 1};
+                border: 1px solid {color:Color 3};
+                border-radius: 4px;
+                padding: 12px;
+            }
+            
+            #panel
+            {
+                position: fixed;
+                top: 50%;
+                -moz-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                -o-transform: translateY(-50%);
+                -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+                width: inherit;
+            }
+
+            #avatar
+            {
+                background: url('{image:Avatar}') center center/cover no-repeat;
+                display: block;
+                -ms-interpolation-mode: bicubic;
+                image-rendering: auto;
+                margin: 0 auto;
+                width: 128px;
+                height: 128px;
+            }
+            
+            #navigation
+            {
+                display: -ms-flexbox;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-top: 8px;
+                width: 130px;
+                text-align: center
+            }
+            
+            #ask_link { cursor: pointer }
+            
+            .navigation_link
+            {
+                background: {color:Color 2};
+                flex: 1 0 62px;
+                line-height: 16px;
+                margin: 1px;
+                -moz-transition: background 250ms ease-out;
+                -o-transition: background 250ms ease-out;
+                -webkit-transition: background 250ms ease-out;
+                transition: background 250ms ease-out;
+            }
+            
+            .navigation_link:hover { background: {color:Color 4} }
+            
+            #text_1, #text_2
+            {
+                display: block;
+                white-space: pre-wrap;
+                width: 128px;
+            }
+            
+            #text_1
+            {
+                border-bottom: 1px solid {color:Color 3};
+                margin-top: 8px;
+                padding-bottom: 4px;
+                text-align: right;
+            }
+            
+            #text_2
+            {
+                font: inherit;
+                margin-top: 4px;
+            }
+            
+            #posts
+            {
+                margin: 32px 0 32px 24px;
+                width: 500px;
+            }
+            
+            .photo_image
+            {
+                display: block;
+                margin: 0 auto 4px;
+                width: 100%;
+            }
+            
+            .html_photoset { margin-bottom: 4px }
+
+            .post
+            {
+                margin-bottom: 32px;
+                width: inherit;
+            }
+            
+            .title
+            {
+                display: block;
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 4px;
+            }
+            
+            .caption { line-height: 14px }
+            
+            blockquote
+            {
+                border-left: 4px solid {color:Color 2};
+                margin: 4px 0 2px 2px;
+                padding: 2px 0 2px 8px;
+            }
+            
+            .caption img { max-width: 100% }
+            
+            .quote_quote
+            {
+                display: block;
+                font-size: 16px;
+                text-align: center;
+            }
+            
+            .quote_source
+            {
+                display: block;
+                text-align: center;
+            }
+            
+            .link
+            {
+                background: {color:Color 2};
+                color: {color:Color 1};
+                display: block;
+                margin-bottom: 6px;
+                padding: 16px;
+                -moz-transition: background 250ms ease-out;
+                -o-transition: background 250ms ease-out;
+                -webkit-transition: background 250ms ease-out;
+                transition: background 250ms ease-out;
+            }
+            
+            .link:hover { background: {color:Color 4} }
+            
+            .link_thumbnail
+            {
+                display: block;
+                margin: 0 auto 8px;
+                max-width: 100%;
+            }
+            
+            .link_name
+            {
+                display: block;
+                font-size: 24px;
+                font-weight: bold;
+                text-align: center;
+            }
+            
+            .link_excerpt
+            {
+                display: block;
+                text-align: center;
+                font-size: 18px;
+            }
+            
+            .link_description { display: block }
+            .chat_line { display: block }
+            .chat_line~.chat_line { margin-top: 4px }
+            .chat_label { font-weight: bold }
+            .audio~.caption, .video~.caption { margin-top: 4px }
+
+            .post_footer
+            {
+                background: {color:Color 2};
+                border-radius: 4px;
+                margin-top: 8px;
+                padding: 4px 10px;
+                text-align: right;
+                -moz-transition: background 250ms ease-out;
+                -o-transition: background 250ms ease-out;
+                -webkit-transition: background 250ms ease-out;
+                transition: background 250ms ease-out;
+            }
+            
+            .post_footer:hover { background: {color:Color 4} }
+            
+            #background_footer
+            {
+                background: url('{image:Background Footer}') left bottom/40% repeat-x;
+                -ms-interpolation-mode: nearest-neighbor;
+                image-rendering: -moz-crisp-edges;
+                image-rendering: -o-crisp-edges;
+                image-rendering: pixelated;
+                position: fixed;
+                bottom: -5%;
+                width: 100%;
+                height: 100%;
+                z-index: -10;
+            }
+            
+            #ask, #ask_gate
+            {
+                opacity: 0;
+                pointer-events: none;
+                -moz-transition: opacity 500ms;
+                -o-transition: opacity 500ms;
+                -webkit-transition: opacity 500ms;
+                transition: opacity 500ms;
+            }
+            
+            #ask
+            {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-50%);
+                width: 500px;
+                height: 210px;
+                z-index: 11;
+            }
+            
+            #ask_gate
+            {
+                background: #000;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 10;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="main">
+            <div id="sidebar">
+                <div id="panel" class="container">
+                    <a href="/" id="avatar"></a>
+                    <div id="navigation">
+                        <a href="/" class="navigation_link">Home</a><!--
+                        {block:HasPages}
+                            {block:Pages}
+                             --><a href="{URL}" class="navigation_link">{Label}</a><!--
+                            {/block:Pages}
+                        {/block:HasPages}
+                        {block:AskEnabled}
+                         --><a id="ask_link" class="navigation_link" onclick="askShow()">{AskLabel}</a><!--
+                        {/block:AskEnabled}
+                     --><a href="#" class="navigation_link">Archive</a>
+                    </div>
+                    <span id="text_1">{text:Text 1}</span>
+                    <pre id="text_2">{text:Text 2}</pre>
+                </div>
+            </div><!--
+         --><div id="posts">
+                {block:Posts}
+                
+                <!-- {block:NoRebloggedFrom}
+{block:RebloggedFrom}{ReblogParentName}{/block:RebloggedFrom}
+{/block:NoRebloggedFrom} -->
+
+                {block:ContentSource}<!-- {SourceURL}
+{block:SourceLogo}<img src="{BlackLogoURL}"width="{LogoWidth}" height="{LogoHeight}" alt="{SourceTitle}" />{/block:SourceLogo}
+{block:NoSourceLogo}{SourceLink}{/block:NoSourceLogo} -->
+{/block:ContentSource}
+
+                    <div class="post container">
+                        <div>
+                            {block:Text}
+                                {block:Title}
+                                    <span class="title">{Title}</span>
+                                {/block:Title}
+                                <div class="caption">
+                                    {Body}
+                                </div>
+                            {/block:Text}
+                        
+                            {block:Photo}
+                                {LinkOpenTag}
+                                    <img src="{PhotoURL-500}" alt="photo_image" class="photo_image" />
+                                {LinkCloseTag}
+                                {block:Caption}
+                                    <div class="caption">
+                                        {Caption}
+                                    </div>
+                                {/block:Caption}
+                            {/block:Photo}
+                            
+                            {block:Photoset}
+                                {Photoset-500}
+                                {block:Caption}
+                                    <div class="caption">
+                                        {Caption}
+                                    </div>
+                                {/block:Caption}
+                            {/block:Photoset}
+                            
+                            {block:Quote}
+                                <p class="quote_quote">&ldquo;{Quote}&rdquo;</p>
+                                {block:Source}
+                                    <span class="quote_source">—{Source}</span>
+                                {/block:Source}
+                            {/block:Quote}
+                            
+                            {block:Link}
+                                <a href="{URL}" {Target} class="link">
+                                    {block:Thumbnail}
+                                        <img src="{Thumbnail}" alt="thumbnail" class="link_thumbnail" />
+                                    {/block:Thumbnail}
+                                    <span class="link_name">{Name}</span>
+                                    {block:Excerpt}
+                                        <span class="link_excerpt">{Excerpt}</span>
+                                    {/block:Excerpt}
+                                </a>
+                                {block:Description}
+                                        <span class="link_description">{Description}</span>
+                                {/block:Description}
+                            {/block:Link}
+                            
+                            {block:Chat}
+                                {block:Title}
+                                    <span class="title">{Title}</span>
+                                {/block:Title}
+                                {block:Lines}
+                                    <span class="chat_line">
+                                        {block:Label}
+                                            <span class="chat_label">{Label}</span>
+                                            <span>{Line}</span>
+                                        {/block:Label}
+                                    </span>
+                                {/block:Lines}
+                            {/block:Chat}
+                            
+                            {block:Audio}
+                                {block:AudioEmbed}
+                                    <div class="audio">
+                                        {AudioEmbed-500}
+                                    </div>
+                                {/block:AudioEmbed}
+                                {block:Caption}
+                                    <div class="caption">
+                                        {Caption}
+                                    </div>
+                                {/block:Caption}
+                            {/block:Audio}
+                            
+                            {block:Video}
+                                <div class="video">
+                                    {VideoEmbed-500}
+                                </div>
+                                {block:Caption}
+                                    <div class="caption">
+                                        {Caption}
+                                    </div>
+                                {/block:Caption}
+                            {/block:Video}
+                        </div>
+                        <div class="post_footer">
+                            <a href="{ShortURL}">{NoteCount} {text:Note Units}</a>
+                        </div>
+                    </div>
+                {/block:Posts}
+            </div>
+        </div>
+        <div id="background_footer"></div>
+        <div id="triggers">
+            <iframe src="http://www.tumblr.com/ask_form/{Name}.tumblr.com" id="ask"></iframe>
+            <div id="ask_gate" onclick="askHide()"></div>
+        </div>
+        <script>
+            var ask      = document.getElementById("ask"),
+                ask_gate = document.getElementById("ask_gate");
+        
+            function askShow()
+            {
+                ask_gate.style.opacity       = 0.25;
+                ask_gate.style.pointerEvents = "auto"
+                ask.style.opacity            = 1;
+                ask.style.pointerEvents      = "auto"
+            }
+            
+            function askHide()
+            {
+                ask_gate.style.opacity  = 0;
+                ask_gate.style.pointerEvents = "none"
+                ask.style.opacity       = 0;
+                ask.style.pointerEvents = "none";
+            }
+        
+            var bgFooter   = document.getElementById("background_footer"),
+                previous   = window.scrollY,
+                starSpeed  = 0,
+                cloudSpeed = 0;
+            
+            function scrollBackground()
+            {
+                var scroll = window.scrollY;
+                
+                if(scroll > previous)
+                {
+                    starSpeed  -= 1.5;
+                    cloudSpeed -= 1;
+                }
+                else
+                {
+                    starSpeed  += 1.5;
+                    cloudSpeed += 1;
+                }
+                
+                document.body.style.backgroundPosition = starSpeed + "px top";
+                bgFooter.style.backgroundPosition = cloudSpeed + "px bottom"
+                previous = scroll;
+            }
+            
+            window.addEventListener("scroll", scrollBackground);
+        </script>
+    </body>
+</html>

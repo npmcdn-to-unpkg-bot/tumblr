@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+
+    <!--------------------------
+    futaba by akigara
+    https://github.com/imoutooo/
+    --------------------------->
+
+    <head>
+        <title>{Title}</title>
+        <meta charset="UTF-8">
+        {block:Description}
+            <meta name="description" content="{MetaDescription}">
+        {/block:Description}
+        <meta name="color:Background Color" content="#fff">
+        <meta name="font:Default Font" content="Arial, Helvetica, sans-serif">
+        <meta name="font:Navigation Font" content="Arial, Helvetica, sans-serif">
+        <meta name="font:Note Count Font" content="Arial, Helvetica, sans-serif">
+        <meta name="image:Logo" content="https://secure.static.tumblr.com/1a815059cf2e85e456a07efecca04148/am8qlrl/jtGnif8l6/tumblr_static_8a8im2k52gowwsccg8ookcw80.png">
+        <link rel="shortcut icon" href="{Favicon}">
+        <link rel="alternate" type="application/rss+xml" href="{RSS}">
+        <!--[if lt IE 9]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        {block:IndexPage}
+            <script src="//cdnjs.cloudflare.com/ajax/libs/infinity/0.2.2/infinity.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.2.1/masonry.pkgd.min.js"></script>
+        {/block:IndexPage}
+        <script src="http://static.tumblr.com/am8qlrl/oeEnjnew5/smoothscroll.min.js"></script>
+        <style>
+            html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{background-color:#ff9;color:#000;text-decoration:none}mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}input,select{vertical-align:middle}
+            
+            @media (max-width: 1024px) {
+                main {width: 100%}
+                #logo {width: 192px}
+                #navigation {font-size: 12px}
+                #navigation a~a {margin-left: 2px}
+                #posts {width: 100% !important}
+                .note-count, .overlay {display: none}
+                
+                article {
+                    margin-bottom: 0 !important;
+                    width: 100%;
+                }
+            }
+            
+            @media (min-width: 1024px) and (max-width: 1536px) {
+                main {width: 768px}
+                #logo {width: 208px}
+                #navigation {font-size: 14px}
+                #navigation a~a {margin-left: 4px}
+                .note-count, .overlay {display: initial}
+                
+                article {
+                    font-size: 76px;
+                    width: 369px;
+                }
+            }
+            
+            @media (min-width: 1536px) and (max-width: 1792px) {
+                main {width: 1024px}
+                #logo {width: 224px}
+                #navigation {font-size: 14px}
+                #navigation a~a {margin-left: 4px}
+                
+                article {
+                    font-size: 80px;
+                    width: 320px;
+                }
+            }
+            
+            @media (min-width: 1792px) and (max-width: 2048px) {
+                main {width: 1280px}
+                #logo {width: 240px}
+                #navigation {font-size: 16px}
+                #navigation a~a {margin-left: 6px}
+                
+                article {
+                    font-size: 84px;
+                    width: 406px;
+                }
+            }
+            
+            @media (min-width: 2048px) and (max-width: 2304px) {
+                main {width: 1536px}
+                #logo {width: 256px}
+                #navigation {font-size: 16px}
+                #navigation a~a {margin-left: 6px}
+                
+                article {
+                    font-size: 88px;
+                    width: 492px;
+                }
+            }
+            
+            @media (min-width: 2304px) {
+                main {width: 1792px}
+                #logo {width: 272px}
+                #navigation {font-size: 18px}
+                #navigation a~a {margin-left: 8px}
+                
+                article {
+                    font-size: 92px;
+                    width: 500px;
+                }
+            }
+            
+            a:link, a:visited, a:hover, a:active {
+                color: inherit;
+                text-decoration: none
+            }
+            
+            body
+            {
+                background: {color:Background Color};
+                font: 12px {font:Default Font};
+                overflow-x: hidden;
+            }
+            
+            main
+            {
+                {block:IndexPage}
+                    margin: 30px auto 300px;
+                    max-width: 1560px;
+                {/block:IndexPage}
+                {block:PermalinkPage}
+                    width: 100%;
+                {/block:PermalinkPage}
+            }
+            
+            header {
+                margin-bottom: 30px;
+            }
+            
+            #logo
+            {
+                display: block;
+                margin: 0 auto 12px;
+                min-width: 216px;
+            }
+            
+            #navigation {
+                text-align: center;
+                -webkit-transition: font-size 250ms ease-out;
+                -moz-transition: font-size 250ms ease-out;
+                -o-transition: font-size 250ms ease-out;
+                transition: font-size 250ms ease-out;
+                z-index: 100;
+            }
+            
+            img[alt="logo"] {max-width: 100%}
+            #navigation a {text-transform: lowercase}
+            
+            #navigation a~a {
+                -webkit-transition: margin-left 250ms ease-out;
+                -moz-transition: margin-left 250ms ease-out;
+                -o-transition: margin-left 250ms ease-out;
+                transition: margin-left 250ms ease-out;
+            }
+            
+            #posts {margin: 0 auto}
+
+            article
+            {
+                {block:IndexPage}
+                    margin-bottom: 30px;
+                    -webkit-transition: filter 500ms ease-out, opacity 500ms ease-out;
+                    -moz-transition: filter 500ms ease-out, opacity 500ms ease-out;
+                    -o-transition: filter 500ms ease-out, opacity 500ms ease-out;
+                    transition: filter 500ms ease-out, opacity 500ms ease-out;
+                {/block:IndexPage}
+                {block:PermalinkPage}
+                    margin: 0 auto;
+                    text-align: center;
+                    width: auto !important;
+                {/block:PermalinkPage}
+            }
+            
+            {block:PermalinkPage}
+                article > * {display: inline-block}
+            {/block:PermalinkPage}
+
+            {block:IndexPage}            
+                span.note-count {
+                    color: #fff;
+                    font-family: {font:Note Count Font};
+                    filter: alpha(opacity=0);
+                    opacity: 0;
+                    pointer-events: none;
+                    position: absolute;
+                    text-align: center;
+                    top: 50%;
+                    -moz-transform: translateY(-50%);
+                    -ms-transform: translateY(-50%);
+                    -o-transform: translateY(-50%);
+                    -webkit-transform: translateY(-50%);
+                    transform: translateY(-50%);
+                    -webkit-transition: filter 250ms ease-out, opacity 250ms ease-out;
+                    -moz-transition: filter 250ms ease-out, opacity 250ms ease-out;
+                    -o-transition: filter 250ms ease-out, opacity 250ms ease-out;
+                    transition: filter 250ms ease-out, opacity 250ms ease-out;
+                    width: 100%;
+                    z-index: 2;
+                }
+                
+                article:hover span.note-count {
+                    filter: alpha(opacity=100);
+                    opacity: 1;
+                }
+                
+                figure.overlay {
+                    background: #000;
+                    filter: alpha(opacity=0);
+                    opacity: 0;
+                    pointer-events: none;
+                    position: absolute;
+                    -webkit-transition: filter 250ms ease-out, opacity 250ms ease-out;
+                    -moz-transition: filter 250ms ease-out, opacity 250ms ease-out;
+                    -o-transition: filter 250ms ease-out, opacity 250ms ease-out;
+                    transition: filter 250ms ease-out, opacity 250ms ease-out;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 1;
+                }
+                
+                article:hover figure.overlay {
+                    filter: alpha(opacity=60);
+                    opacity: 0.6 !important;
+                }
+                
+                .permalink {
+                    display: block;
+                    text-align: center;
+                    width: 100%;
+                }
+            {/block:IndexPage}
+            
+            article img~img {margin-top: 4px}
+
+            article.photo img
+            {
+                background: #fff;
+                vertical-align: middle;
+                max-width: 100%;
+            }
+            
+            {block:PermalinkPage}
+                div.photoset {max-width: 500px}
+
+                #caption
+                {
+                    font-size: 12px;
+                    margin-left: 10px;
+                    text-align: left;
+                    width: 300px;
+                    vertical-align: top;
+                }
+                
+                #caption > div, #caption > span, #caption > section
+                {
+                    background: #f6f6f6;
+                    color: #000;
+                    display: block;
+                    margin-bottom: 4px;
+                    padding: 10px;
+                }
+                
+                #reblogged {text-align: center}
+                #reblogged a {font-weight: bold}
+                
+                #notes ol.notes
+                {
+                    list-style-type: none;
+                    text-align: center;
+                }
+                
+                #notes li:not(.more_notes_link_container)
+                {
+                    display: inline-block;
+                    margin: 1px;
+                }
+                
+                #notes img.avatar
+                {
+                    width: 24px;
+                    height: 24px;
+                }
+    
+                #notes li.more_notes_link_container
+                {
+                    display: block;
+                    font-size: 10px;
+                    margin-top: 2px;
+                }
+    
+                blockquote
+                {
+                    border-left: 1px solid #d6d6d6;
+                    margin: 4px 0 4px 6px;
+                    padding: 1px 0 1px 10px;
+                }
+                
+                p {line-height: 16px}
+                p~p {margin-top: 10px}
+                pre {white-space: normal}
+            {/block:PermalinkPage}
+            
+            {block:AskEnabled}
+                #ask {cursor: pointer}
+            
+                #ask-module {
+                    filter: alpha(opacity=0);
+                    opacity: 0;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    z-index: -100;
+                }
+                
+                #ask-form {
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    -moz-transform: translate(-50%,-50%);
+                    -ms-transform: translate(-50%,-50%);
+                    -o-transform: translate(-50%,-50%);
+                    -webkit-transform: translate(-50%,-50%);
+                    transform: translate(-50%,-50%);
+                    width: 400px;
+                    height: 250px;
+                    z-index: 102;
+                }
+                
+                #overlay {
+                    background: #000;
+                    filter: alpha(opacity=50);
+                    opacity: 0.5;
+                    height: 100%;
+                    z-index: 101;
+                }
+            {/block:AskEnabled}
+            
+            #selector-module {
+                border: 2px solid #000;
+                opacity: 0;
+                pointer-events: none;
+                position: absolute;
+                width: 100px;
+                height: 100px;
+                -webkit-transition: all 250ms ease-out;
+                -moz-transition: all 250ms ease-out;
+                -o-transition: all 250ms ease-out;
+                transition: all 250ms ease-out;
+                top: 0;
+                left: 0;
+                z-index: 90;
+            }
+        </style>
+    </head>
+
+    <body>
+        <main id="main">
+            <header>
+                <nav id="navigation">
+                    <a href="/" id="logo">
+                        <img src="{image:Logo}" alt="logo">
+                    </a>
+                    {block:AskEnabled}
+                        <a id="ask" onclick="askOpen()">{AskLabel}</a>
+                    {/block:AskEnabled}
+                    {block:HasPages}
+                        {block:Pages}
+                            <a href="{URL}">{Label}</a>
+                        {/block:Pages}
+                    {/block:HasPages}
+                    <a href="/archive">archive</a>
+                </nav>
+            </header>
+            <section id="posts">
+                
+                {block:Posts}
+                    <article class="{PostType}">
+                        {block:IndexPage}
+                            <span class="note-count">{NoteCount}</span>
+                            <figure class="overlay"></figure>
+                            <a href="{Permalink}" target="_blank" class="permalink">
+                        {/block:IndexPage}
+                            {block:Photo}
+                                <img src="{PhotoURL-500}" alt="image">
+                            {/block:Photo}
+                            
+                            {block:Photoset}
+                                <div class="photoset" data-id="photoset{PostID}">
+                                    {block:Photos}
+                                        <img src="{PhotoURL-500}" alt="image">
+                                    {/block:Photos}
+                                </div>
+                            {/block:Photoset}
+                        {block:IndexPage}
+                            </a>
+                        {/block:IndexPage}
+                        {block:PermalinkPage}
+                            <section id="caption">
+                                {block:Caption}
+                                    <div>
+                                        {Caption}
+                                    </div>
+                                {block:Caption}
+                                {block:RebloggedFrom}
+                                    <span id="reblogged">(via <a href="{ReblogParentURL}">{ReblogParentName}</a>{block:ContentSource}, source <a href="{SourceURL}">{SourceTitle}</a>{/block:ContentSource})</span>
+                                {/block:RebloggedFrom}
+                                {block:PostNotes}
+                                    <section id="notes">
+                                        {PostNotes-64}
+                                    </section>
+                                {/block:PostNotes}
+                            </section>
+                        {/block:PermalinkPage}
+                    </article>
+                {/block:Posts}
+            </section>
+        </main>
+        {block:IndexPage}
+            <aside>
+                {block:AskEnabled}
+                    <section id="ask-module">
+                        <iframe src="http://www.tumblr.com/ask_form/{Name}.tumblr.com" id="ask-form"></iframe>
+                        <figure id="overlay" onclick="askClose()"></figure>
+                    </section>
+                {/block:AskEnabled}
+            </aside>
+        {/block:IndexPage}
+        <script>
+            {block:IndexPage}
+                // Global Variables
+            
+                var winH        =   $(window).height();
+                var $main       =   $(document.getElementById("main"));
+                var $posts      =   $(document.getElementById("posts"));
+                var infinity    =   new infinity.ListView($posts);
+                var page        =   1
+                var timeout     =   false;
+                    
+                // Functions
+                    
+                function loadPosts() {
+                    $.get( "/page/" + ++page, function(data) {
+                        history.pushState(null, null, "/page/" + page);
+                        var newPosts = $(data).find('#posts article.photo');
+                        var myLoadingCounter = 0;
+                        
+                        $(newPosts).imagesLoaded()
+                            .done(function() {
+                                infinity.append(newPosts);
+                                $posts.masonry('appended', newPosts);
+                                timeout = false;
+                            })
+                    });
+                }
+                
+                // Main
+                
+                $posts.imagesLoaded(function() {
+                    $posts.masonry({
+                        gutter: 30,
+                        "isFitWidth": true,
+                        itemSelector: 'article.photo',
+                        transitionDuration: 0
+                    });
+                });
+                
+                $(window).scroll(function(event) {
+                    var scroll = $(window).scrollTop();
+                    
+                    if( (!timeout) && (scroll >= $(document).height() - winH - 300) ) {
+                        timeout = true;
+                        loadPosts();
+                    }
+                });
+            {/block:IndexPage}
+            
+            {block:PermalinkPage}
+                var $more = $('li.more_notes_link');
+            
+                function tumblrNotesInserted() {
+                    $('#notes span.action').remove();
+                    $('li.with_commentary').empty();
+                    $more.text("(more notes)");
+                }
+                
+                tumblrNotesInserted();
+            {/block:PermalinkPage}
+            
+            {block:AskEnabled}
+                var $askModule = $(document.getElementById("ask-module")).css("height", window.screen.height),
+                    asking = false;
+                
+                function askOpen() {
+                    if(!asking) {
+                        asking = true;
+                        
+                        $askModule
+                            .css("z-index", 100)
+                            .animate({
+                                "filter": "alpha(opacity=100)",
+                                "opacity": 1
+                            }, 250);
+                    }
+                }
+                
+                function askClose() {
+                    asking = false;
+                    
+                    $askModule.animate({
+                        "filter": "filter: alpha(opacity=0)",
+                        "opacity": 0,
+                        "z-index": -100
+                    }, 250);
+                }
+            {/block:AskEnabled}
+        </script>
+    </body>
+</html>
