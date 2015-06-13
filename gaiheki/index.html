@@ -545,35 +545,23 @@
                     var page = e.target;
 
                     if(page == null) return;
-                    element.preventDefault();
+                    e.preventDefault();
                     
-                    $.get(page.getAttribute("href"), function(data)
+                    var url = page.getAttribute("href");
+                    
+                    $.get(url, function(data)
                     {
                         var newPosts = $(data).find("#posts").html();
                         
+                        history.pushState(null, null, url);
                         window.scrollTo(0,0);
                         $(posts).html(newPosts);
                     });
                 }
-            
-                function navigate(e)
-                {
-                    event = event || window.event;
-                    
-                    switch(event.keyCode)
-                    {
-                        case 37:
-                            get( document.getElementById("previous") );
-                            break;
-
-                        case 39:
-                            get( document.getElementById("next") );
-                            break;
-                    }
-                }
-                
-                document.onkeydown = navigate;
             {/block:Pagination}
+            
+            // Begin support for ajax history manipulation.
+            window.onpopstate = function(e) { console.log(e); }
         </script>
     </body>
 </html>
