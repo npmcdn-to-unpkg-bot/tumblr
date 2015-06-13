@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 
 <!---------------------------------------------------------------
   Gaiheki
@@ -19,6 +19,7 @@
 <html>
     <head>
         <title>Title</title>
+        <meta charset="UTF-8">
         <meta name="image:Background" content="" />
         <meta name="image:Background Footer" content="" />
         <meta name="image:Avatar" content="" />
@@ -53,7 +54,7 @@
                 image-rendering: pixelated;
             }
             
-            #main
+            main
             {
                 margin: 0 auto;
                 width: 700px;
@@ -102,7 +103,7 @@
                 height: 128px;
             }
             
-            #navigation
+            nav
             {
                 display: -ms-flexbox;
                 display: flex;
@@ -115,7 +116,7 @@
             
             #ask_link { cursor: pointer }
             
-            .navigation_link
+            .nav_link
             {
                 background: {color:Color 2};
                 flex: 1 0 62px;
@@ -127,7 +128,7 @@
                 transition: background 250ms ease-out;
             }
             
-            .navigation_link:hover { background: {color:Color 4} }
+            .nav_link:hover { background: {color:Color 4} }
             
             #text_1, #text_2
             {
@@ -164,13 +165,13 @@
             
             .html_photoset { margin-bottom: 4px }
 
-            .post
+            article
             {
                 margin-bottom: 32px;
                 width: inherit;
             }
             
-            .post img
+            article img
             {
                 -ms-interpolation-mode: bicubic;
                 image-rendering: auto;
@@ -251,7 +252,7 @@
             .chat_label { font-weight: bold }
             .audio~.caption, .video~.caption { margin-top: 4px }
 
-            .post_footer
+            aside
             {
                 background: {color:Color 2};
                 border-radius: 4px;
@@ -264,7 +265,7 @@
                 transition: background 250ms ease-out;
             }
             
-            .post_footer:hover { background: {color:Color 4} }
+            aside:hover { background: {color:Color 4} }
             
             #pagination
             {
@@ -349,26 +350,26 @@
         </style>
     </head>
     <body>
-        <div id="main">
-            <div id="sidebar">
+        <main>
+            <section id="sidebar">
                 <div id="panel" class="container">
                     <a href="/" id="avatar"></a>
-                    <div id="navigation">
-                        <a href="/" class="navigation_link">Home</a><!--
+                    <nav>
+                        <a href="/" class="nav_link">Home</a><!--
                         {block:HasPages}
                             {block:Pages}
-                             --><a href="{URL}" class="navigation_link">{Label}</a><!--
+                             --><a href="{URL}" class="nav_link">{Label}</a><!--
                             {/block:Pages}
                         {/block:HasPages}
                         {block:AskEnabled}
-                         --><a id="ask_link" class="navigation_link" onclick="askShow()">{AskLabel}</a><!--
+                         --><a id="ask_link" class="nav_link" onclick="askShow()">{AskLabel}</a><!--
                         {/block:AskEnabled}
-                     --><a href="#" class="navigation_link">Archive</a>
-                    </div>
+                     --><a href="#" class="nav_link">Archive</a>
+                    </nav>
                     <span id="text_1">{text:Text 1}</span>
                     <pre id="text_2">{text:Text 2}</pre>
                 </div>
-            </div><!--
+            </section><!--
          --><div id="posts">
                 {block:Posts}
                 
@@ -381,7 +382,7 @@
 {block:NoSourceLogo}{SourceLink}{/block:NoSourceLogo} -->
 {/block:ContentSource}
 
-                    <div class="post container">
+                    <article class="container">
                         <div>
                             {block:Text}
                                 {block:Title}
@@ -472,18 +473,18 @@
                                 {/block:Caption}
                             {/block:Video}
                         </div>
-                        <div class="post_footer">
+                        <aside>
                             <a href="{ShortURL}">{NoteCount} {text:Note Units}</a>
-                        </div>
-                    </div>
+                        </aside>
+                    </article>
                 {/block:Posts}
                 {block:Pagination}
-                    <div id="pagination">
-                        {block:PreviousPage}<a href="{PreviousPage}" id="pagination_previous" class="pagination_link">Back</a>{/block:PreviousPage}{block:JumpPagination length="5"}{block:CurrentPage}<a id="pagination_current" class="pagination_link">{PageNumber}</a>{/block:CurrentPage}{block:JumpPage}<a href="{URL}" class="pagination_link">{PageNumber}</a>{/block:JumpPage}{/block:JumpPagination}{block:NextPage}<a href="{NextPage}" id="pagination_next" class="pagination_link">Next</a>{/block:NextPage}
-                    </div>
+                    <section id="pagination">
+                        {block:PreviousPage}<a data-href="{PreviousPage}" id="previous" class="pagination_link" onclick="get('previous')">Back</a>{/block:PreviousPage}{block:JumpPagination length="5"}{block:CurrentPage}<a id="pagination_current" class="pagination_link">{PageNumber}</a>{/block:CurrentPage}{block:JumpPage}<a href="{URL}" class="pagination_link">{PageNumber}</a>{/block:JumpPage}{/block:JumpPagination}{block:NextPage}<a data-href="{NextPage}" id="next" class="pagination_link" onclick="get('next')">Next</a>{/block:NextPage}
+                </section>
                 {/block:Pagination}
             </div>
-        </div>
+        </main>
         <div id="background_footer"></div>
         <div id="triggers">
             <iframe src="http://www.tumblr.com/ask_form/{Name}.tumblr.com" id="ask"></iframe>
@@ -530,15 +531,32 @@
             
             function askHide()
             {
-                ask_gate.style.opacity  = 0;
+                ask_gate.style.opacity       = 0;
                 ask_gate.style.pointerEvents = "none"
-                ask.style.opacity       = 0;
-                ask.style.pointerEvents = "none";
+                ask.style.opacity            = 0;
+                ask.style.pointerEvents      = "none";
             }
             
-            var posts    = document.getElementById("posts");
+            var posts = document.getElementById("posts");
             
             {block:Pagination}
+                function get(direction)
+                {
+                    var page = document.getElementById(direction);
+                    
+                    if(page == null) return;
+
+                    $.get($(page).attr("data-href"), function(data)
+                    {
+                        var newPosts = $(data).find("#posts").html();
+                        
+                        window.scrollTo(0,0);
+                        $(posts).html(newPosts);
+                    });
+                    
+                    console.log("AJAX SUCCESS");
+                }
+            
                 function navigate(event)
                 {
                     event = event || window.event;
@@ -546,31 +564,12 @@
                     switch(event.keyCode)
                     {
                             case 37:
-                                var prevPage = document.getElementById("pagination_previous");
-                                
-                                if(prevPage == null) break;
-                                
-                                $.get($(prevPage).attr("href"), function(data)
-                                {
-                                    var newPosts = $(data).find("#posts").html();
-                                    $(posts).html(newPosts);
-                                });
+                                get("previous");
                                 break;
-                        {/block:PreviousPage}
-                            
-                        {block:NextPage}
+
                             case 39:
-                                var nextPage = document.getElementById("pagination_next")
-                                
-                                if(nextPage == null) break;
-                                
-                                $.get($(nextPage).attr("href"), function(data)
-                                {
-                                    var newPosts = $(data).find("#posts").html();
-                                    $(posts).html(newPosts);
-                                });
+                                get("next");
                                 break;
-                        {/block:NextPage}
                     }
                 }
                 
