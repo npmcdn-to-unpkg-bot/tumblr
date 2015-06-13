@@ -7,10 +7,13 @@
   Resources
   x Background graphics: /images/clouds.png
                          /images/stars.png
-    by Nicalis (http://www.nicalis.com/                  
+    by Nicalis (http://www.nicalis.com/
+    
+  x jQuery Builder (https://github.com/jgallen23/jquery-builder)
+    by jgallen23 (https://github.com/jgallen23)
   
   x SmoothScroll.js (https://gist.github.com/galambalazs/6477177)
-    by galambalazs (https://github.com/galambalazs)
+    by galambalazs (https://github.com/galambalazs) 
   -------------------------------------------------------------->
 
 <html>
@@ -476,7 +479,7 @@
                 {/block:Posts}
                 {block:Pagination}
                     <div id="pagination">
-                        {block:PreviousPage}<a href="{PreviousPage}" class="pagination_link">Back</a>{/block:PreviousPage}{block:JumpPagination length="5"}{block:CurrentPage}<a id="pagination_current" class="pagination_link">{PageNumber}</a>{/block:CurrentPage}{block:JumpPage}<a href="{URL}" class="pagination_link">{PageNumber}</a>{/block:JumpPage}{/block:JumpPagination}{block:NextPage}<a href="{NextPage}" class="pagination_link">Next</a>{/block:NextPage}
+                        {block:PreviousPage}<a href="{PreviousPage}" id="pagination_previous" class="pagination_link">Back</a>{/block:PreviousPage}{block:JumpPagination length="5"}{block:CurrentPage}<a id="pagination_current" class="pagination_link">{PageNumber}</a>{/block:CurrentPage}{block:JumpPage}<a href="{URL}" class="pagination_link">{PageNumber}</a>{/block:JumpPage}{/block:JumpPagination}{block:NextPage}<a href="{NextPage}" id="pagination_next" class="pagination_link">Next</a>{/block:NextPage}
                     </div>
                 {/block:Pagination}
             </div>
@@ -487,49 +490,6 @@
             <div id="ask_gate" onclick="askHide()"></div>
         </div>
         <script>
-            {block:Pagination}
-                function navigate(event)
-                {
-                    event = event || window.event;
-                    
-                    switch(event.keyCode)
-                    {
-                        {block:PreviousPage}
-                            case 37:
-                                location.assign("{PreviousPage}");
-                                break;
-                        {/block:PreviousPage}
-                            
-                        {block:NextPage}
-                            case 39:
-                                location.assign("{NextPage}");
-                                break;
-                        {/block:NextPage}
-                    }
-                }
-                
-                document.onkeydown = navigate;
-            {/block:Pagination}
-        
-            var ask      = document.getElementById("ask"),
-                ask_gate = document.getElementById("ask_gate");
-        
-            function askShow()
-            {
-                ask_gate.style.opacity       = 0.5;
-                ask_gate.style.pointerEvents = "auto"
-                ask.style.opacity            = 1;
-                ask.style.pointerEvents      = "auto"
-            }
-            
-            function askHide()
-            {
-                ask_gate.style.opacity  = 0;
-                ask_gate.style.pointerEvents = "none"
-                ask.style.opacity       = 0;
-                ask.style.pointerEvents = "none";
-            }
-        
             var bgFooter   = document.getElementById("background_footer"),
                 previous   = window.scrollY,
                 starSpeed  = 0,
@@ -556,6 +516,66 @@
             }
             
             window.addEventListener("scroll", scrollBackground);
+        
+            var ask      = document.getElementById("ask"),
+                ask_gate = document.getElementById("ask_gate");
+        
+            function askShow()
+            {
+                ask_gate.style.opacity       = 0.5;
+                ask_gate.style.pointerEvents = "auto"
+                ask.style.opacity            = 1;
+                ask.style.pointerEvents      = "auto"
+            }
+            
+            function askHide()
+            {
+                ask_gate.style.opacity  = 0;
+                ask_gate.style.pointerEvents = "none"
+                ask.style.opacity       = 0;
+                ask.style.pointerEvents = "none";
+            }
+            
+            var posts    = document.getElementById("posts");
+            
+            {block:Pagination}
+                function navigate(event)
+                {
+                    event = event || window.event;
+                    
+                    switch(event.keyCode)
+                    {
+                            case 37:
+                                var prevPage = document.getElementById("pagination_previous");
+                                
+                                if(prevPage == null) break;
+                                
+                                $.get($(prevPage).attr("href"), function(data)
+                                {
+                                    var newPosts = $(data).find("#posts").html();
+                                    $(posts).html(newPosts);
+                                });
+                                break;
+                        {/block:PreviousPage}
+                            
+                        {block:NextPage}
+                            case 39:
+                                var nextPage = document.getElementById("pagination_next")
+                                
+                                if(nextPage == null) break;
+                                
+                                $.get($(nextPage).attr("href"), function(data)
+                                {
+                                    var newPosts = $(data).find("#posts").html();
+                                    $(posts).html(newPosts);
+                                });
+                                break;
+                        {/block:NextPage}
+                    }
+                }
+                
+                document.onkeydown = navigate;
+            {/block:Pagination}
         </script>
     </body>
 </html>
