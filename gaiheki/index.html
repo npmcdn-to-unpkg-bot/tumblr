@@ -553,15 +553,23 @@
                     {
                         var newPosts = $(data).find("#posts").html();
                         
-                        history.pushState(null, null, url);
+                        history.pushState({posts: newPosts}, null, url);
                         window.scrollTo(0,0);
                         $(posts).html(newPosts);
                     });
                 }
             {/block:Pagination}
             
-            // Begin support for ajax history manipulation.
-            window.onpopstate = function(e) { console.log(e); }
+            if(window.history.state == null)
+            {
+                console.log("wtf");
+                history.replaceState({posts: $(posts).html()}, null, null);
+                console.log("ok");
+            }
+            
+            window.onpopstate = function(e) {
+                $(posts).html(e.state.posts);
+            }
         </script>
     </body>
 </html>
