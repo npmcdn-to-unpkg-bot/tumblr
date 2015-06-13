@@ -480,7 +480,7 @@
                 {/block:Posts}
                 {block:Pagination}
                     <section id="pagination">
-                        {block:PreviousPage}<a data-href="{PreviousPage}" id="previous" class="pagination_link" onclick="get('previous')">Back</a>{/block:PreviousPage}{block:JumpPagination length="5"}{block:CurrentPage}<a id="pagination_current" class="pagination_link">{PageNumber}</a>{/block:CurrentPage}{block:JumpPage}<a href="{URL}" class="pagination_link">{PageNumber}</a>{/block:JumpPage}{/block:JumpPagination}{block:NextPage}<a data-href="{NextPage}" id="next" class="pagination_link" onclick="get('next')">Next</a>{/block:NextPage}
+                        {block:PreviousPage}<a href="{PreviousPage}" id="previous" class="pagination_link" onclick="ajax(event)">Back</a>{/block:PreviousPage}{block:JumpPagination length="5"}{block:CurrentPage}<a id="pagination_current" class="pagination_link">{PageNumber}</a>{/block:CurrentPage}{block:JumpPage}<a href="{URL}" class="pagination_link" onclick="ajax(event)">{PageNumber}</a>{/block:JumpPage}{/block:JumpPagination}{block:NextPage}<a href="{NextPage}" id="next" class="pagination_link" onclick="ajax(event)">Next</a>{/block:NextPage}
                 </section>
                 {/block:Pagination}
             </div>
@@ -540,36 +540,35 @@
             var posts = document.getElementById("posts");
             
             {block:Pagination}
-                function get(direction)
+                function ajax(e)
                 {
-                    var page = document.getElementById(direction);
-                    
-                    if(page == null) return;
+                    var page = e.target;
 
-                    $.get($(page).attr("data-href"), function(data)
+                    if(page == null) return;
+                    element.preventDefault();
+                    
+                    $.get(page.getAttribute("href"), function(data)
                     {
                         var newPosts = $(data).find("#posts").html();
                         
                         window.scrollTo(0,0);
                         $(posts).html(newPosts);
                     });
-                    
-                    console.log("AJAX SUCCESS");
                 }
             
-                function navigate(event)
+                function navigate(e)
                 {
                     event = event || window.event;
                     
                     switch(event.keyCode)
                     {
-                            case 37:
-                                get("previous");
-                                break;
+                        case 37:
+                            get( document.getElementById("previous") );
+                            break;
 
-                            case 39:
-                                get("next");
-                                break;
+                        case 39:
+                            get( document.getElementById("next") );
+                            break;
                     }
                 }
                 
