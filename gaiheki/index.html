@@ -355,16 +355,16 @@
                 <div id="panel" class="container">
                     <a href="/" id="avatar"></a>
                     <nav>
-                        <a href="/" class="nav_link">Home</a><!--
+                        <a href="/" class="nav_link" onclick="ajax(event)">Home</a><!--
                         {block:HasPages}
                             {block:Pages}
-                             --><a href="{URL}" class="nav_link">{Label}</a><!--
+                             --><a href="{URL}" class="nav_link" onclick="ajax(event)">{Label}</a><!--
                             {/block:Pages}
                         {/block:HasPages}
                         {block:AskEnabled}
                          --><a id="ask_link" class="nav_link" onclick="askShow()">{AskLabel}</a><!--
                         {/block:AskEnabled}
-                     --><a href="#" class="nav_link">Archive</a>
+                     --><a href="/archive" class="nav_link">Archive</a>
                     </nav>
                     <span id="text_1">{text:Text 1}</span>
                     <pre id="text_2">{text:Text 2}</pre>
@@ -558,18 +558,12 @@
                         $(posts).html(newPosts);
                     });
                 }
+                
+                if(window.history.state == null)
+                    history.replaceState({posts: $(posts).html()}, null, null);
+
+                window.onpopstate = function(e) { $(posts).html(e.state.posts); }
             {/block:Pagination}
-            
-            if(window.history.state == null)
-            {
-                console.log("wtf");
-                history.replaceState({posts: $(posts).html()}, null, null);
-                console.log("ok");
-            }
-            
-            window.onpopstate = function(e) {
-                $(posts).html(e.state.posts);
-            }
         </script>
     </body>
 </html>
