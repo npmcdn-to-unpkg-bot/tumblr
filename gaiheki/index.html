@@ -157,6 +157,8 @@
                 width: 500px;
             }
             
+            .photo_container { background: #000 }
+            
             .photo_image
             {
                 display: block;
@@ -353,7 +355,7 @@
         <main>
             <section id="sidebar">
                 <div id="panel" class="container">
-                    <a href="/" id="avatar"></a>
+                    <a href="/" id="avatar" onclick="ajax(event)"></a>
                     <nav>
                         <a href="/" class="nav_link" onclick="ajax(event)">Home</a><!--
                         {block:HasPages}
@@ -395,7 +397,9 @@
                         
                             {block:Photo}
                                 {LinkOpenTag}
+                                <figure class="photo_container">
                                     <img src="{PhotoURL-500}" alt="photo_image" class="photo_image" />
+                                </figure>
                                 {LinkCloseTag}
                                 {block:Caption}
                                     <div class="caption">
@@ -405,7 +409,9 @@
                             {/block:Photo}
                             
                             {block:Photoset}
-                                {Photoset-500}
+                                <figure class="photo_container">
+                                    {Photoset-500}
+                                </figure>
                                 {block:Caption}
                                     <div class="caption">
                                         {Caption}
@@ -543,11 +549,17 @@
                 function ajax(e)
                 {
                     var page = e.target;
-
+                    
                     if(page == null) return;
                     e.preventDefault();
                     
                     var url = page.getAttribute("href");
+
+                    if(window.location.pathname == url)
+                    {
+                        window.scrollTo(0,0);
+                        return;
+                    }
                     
                     $.get(url, function(data)
                     {
