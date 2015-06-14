@@ -576,6 +576,7 @@
                         history.pushState({posts: newPosts}, null, url);
                         window.scrollTo(0,0);
                         $(posts).html(newPosts);
+                        $('.photoset-grid').photosetGrid();
                     });
                 }
                 
