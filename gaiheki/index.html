@@ -13,7 +13,7 @@
     by jgallen23 (https://github.com/jgallen23)
   
   x SmoothScroll.js (https://gist.github.com/galambalazs/6477177)
-    by galambalazs (https://github.com/galambalazs) 
+    by galambalazs (https://github.com/galambalazs)
   -------------------------------------------------------------->
 
 <html>
@@ -31,7 +31,8 @@
         <meta name="text:Text 1" content="Text 1" />
         <meta name="text:Text 2" content="Text 2" />
         <meta name="text:Note Units" content="notes" />
-        <script src="http://static.tumblr.com/hbypfc2/xaVnpw779/jquery.min.js"></script>
+        <script src="http://static.tumblr.com/hbypfc2/kR6npwx8k/jquery.min.js"></script>
+        <script src="http://static.tumblr.com/wgijwsy/jgemkyt9x/jquery.photoset-grid.min.js"></script>
         <script src="http://static.tumblr.com/hbypfc2/8WVnpqov5/smoothscroll.js"></script>
         <link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
         <style>
@@ -409,8 +410,10 @@
                             {/block:Photo}
                             
                             {block:Photoset}
-                                <figure class="photo_container">
-                                    {Photoset-500}
+                                <figure class="photoset-grid" data-layout="{PhotosetLayout}">
+                                    {block:Photos}
+                                        <img src="{PhotoURL-500}" alt="photo_image" class="photo_image" />
+                                    {/block:Photos}
                                 </figure>
                                 {block:Caption}
                                     <div class="caption">
@@ -497,6 +500,8 @@
             <div id="ask_gate" onclick="askHide()"></div>
         </div>
         <script>
+            $('.photoset-grid').photosetGrid();
+        
             var bgFooter   = document.getElementById("background_footer"),
                 previous   = window.scrollY,
                 starSpeed  = 0,
