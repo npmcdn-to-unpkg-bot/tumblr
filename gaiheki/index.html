@@ -161,16 +161,18 @@
                 width: 500px;
             }
             
-            .photo_container { background: #000 }
+            .photo_container
+            {
+                background: #000;
+                margin-bottom: 4px;
+            }
             
             .photo_image
             {
                 display: block;
-                margin: 0 auto 4px;
+                margin: 0 auto;
             }
             
-            .html_photoset { margin-bottom: 4px }
-
             article
             {
                 margin-bottom: 32px;
@@ -413,7 +415,7 @@
                             {/block:Photo}
                             
                             {block:Photoset}
-                                <figure class="photoset-grid" data-layout="{PhotosetLayout}">
+                                <figure class="photoset-grid photo_container" data-layout="{PhotosetLayout}">
                                     {block:Photos}
                                         <img src="{PhotoURL-500}" alt="photo_image" class="photo_image" />
                                     {/block:Photos}
