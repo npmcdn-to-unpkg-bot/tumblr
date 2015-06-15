@@ -4,19 +4,19 @@
      Gaiheki
      imoutooo (https://github.com/imoutooo)
   
-      Resources
-      x Background graphics: /images/clouds.png
-                             /images/stars.png
-        by Nicalis (http://www.nicalis.com/
+     Resources
+     x Background graphics: /images/clouds.png
+                            /images/stars.png
+       by Nicalis (http://www.nicalis.com/
     
-      x jQuery Builder (https://github.com/jgallen23/jquery-builder)
-        by jgallen23 (https://github.com/jgallen23)
+     x jQuery Builder (https://github.com/jgallen23/jquery-builder)
+       by jgallen23 (https://github.com/jgallen23)
     
-      x photoset-grid (https://github.com/stylehatch/photoset-grid/)
-        by stylehatch (https://github.com/stylehatch)
+     x photoset-grid (https://github.com/stylehatch/photoset-grid/)
+       by stylehatch (https://github.com/stylehatch)
   
-      x SmoothScroll.js (https://gist.github.com/galambalazs/6477177)
-        by galambalazs (https://github.com/galambalazs)
+     x SmoothScroll.js (https://gist.github.com/galambalazs/6477177)
+       by galambalazs (https://github.com/galambalazs)
   -------------------------------------------------------------->
 
 <html>
@@ -581,7 +581,8 @@
                             
                             newPosts.innerHTML = xmlHttp.responseText;
                             newPosts.innerHTML = newPosts.querySelector("#posts").innerHTML;
-                            history.pushState({posts: newPosts.innerHTML}, null, url);
+                            history.replaceState({posts: posts.innerHTML}, null, null);
+                            history.pushState(null, null, url);
                             window.scrollTo(0,0);
                             posts.innerHTML = newPosts.innerHTML;
                             $('.photoset-grid').photosetGrid();
@@ -591,11 +592,8 @@
                     xmlHttp.open("GET", page, true);    
                     xmlHttp.send();
                 }
-                
-                if(window.history.state == null)
-                    history.replaceState({posts: $(posts).html()}, null, null);
 
-                window.onpopstate = function(e) { $(posts).html(e.state.posts); }
+                window.onpopstate = function(e) { posts.innerHTML = e.state.posts; }
             {/block:Pagination}
         </script>
     </body>
