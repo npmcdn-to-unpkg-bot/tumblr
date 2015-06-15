@@ -34,7 +34,7 @@
         <meta name="text:Text 1" content="Text 1" />
         <meta name="text:Text 2" content="Text 2" />
         <meta name="text:Note Units" content="notes" />
-        <script src="http://static.tumblr.com/hbypfc2/kR6npwx8k/jquery.min.js"></script>
+        <script src="http://static.tumblr.com/hbypfc2/Je2nq02tu/jquery.min.js"></script>
         <script src="http://static.tumblr.com/wgijwsy/jgemkyt9x/jquery.photoset-grid.min.js"></script>
         <script src="http://static.tumblr.com/hbypfc2/8WVnpqov5/smoothscroll.js"></script>
         <link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
@@ -556,6 +556,8 @@
             var posts = document.getElementById("posts");
             
             {block:Pagination}
+                var xmlHttp = new XMLHttpRequest();
+            
                 function ajax(e)
                 {
                     var page = e.target;
@@ -571,15 +573,23 @@
                         return;
                     }
                     
-                    $.get(url, function(data)
+                    xmlHttp.onreadystatechange = function()
                     {
-                        var newPosts = $(data).find("#posts").html();
-                        
-                        history.pushState({posts: newPosts}, null, url);
-                        window.scrollTo(0,0);
-                        $(posts).html(newPosts);
-                        $('.photoset-grid').photosetGrid();
-                    });
+                        if( (xmlHttp.readyState == 4) && (xmlHttp.status == 200) )
+                        {
+                            var newPosts = document.createElement("div");
+                            
+                            newPosts.innerHTML = xmlHttp.responseText;
+                            newPosts.innerHTML = newPosts.querySelector("#posts").innerHTML;
+                            history.pushState({posts: newPosts.innerHTML}, null, url);
+                            window.scrollTo(0,0);
+                            posts.innerHTML = newPosts.innerHTML;
+                            $('.photoset-grid').photosetGrid();
+                        }
+                    }
+                    
+                    xmlHttp.open("GET", page, true);    
+                    xmlHttp.send();
                 }
                 
                 if(window.history.state == null)
