@@ -569,15 +569,12 @@
             
             {block:Pagination}
                 var xmlHttp = new XMLHttpRequest();
-            
+                
                 function ajax(e)
                 {
-                    var page = e.target;
-                    
-                    if(page == null) return;
+                    var url = e.target.getAttribute("href");
+
                     e.preventDefault();
-                    
-                    var url = page.getAttribute("href");
 
                     if(window.location.pathname == url)
                     {
@@ -601,7 +598,7 @@
                         }
                     }
                     
-                    xmlHttp.open("GET", page, true);    
+                    xmlHttp.open("GET", url, true);    
                     xmlHttp.send();
                 }
 
