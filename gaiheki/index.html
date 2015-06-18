@@ -42,7 +42,7 @@
         <script src="http://static.tumblr.com/wgijwsy/jgemkyt9x/jquery.photoset-grid.min.js"></script>
         <script src="http://static.tumblr.com/hbypfc2/8WVnpqov5/smoothscroll.js"></script>
         <style>
-            a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
+            a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
             
             a:link, a:visited, a:hover, a:active
             {
@@ -85,6 +85,18 @@
                 border: 1px solid {color:Color 3};
                 border-radius: 4px;
                 padding: 12px;
+            }
+            
+            .container2
+            {
+                background: {color:Color 2};
+                border-radius: 4px;
+                line-height: 14px;
+                padding: 4px 10px;
+                -moz-transition: background 250ms ease-out;
+                -o-transition: background 250ms ease-out;
+                -webkit-transition: background 250ms ease-out;
+                transition: background 250ms ease-out;
             }
             
             #panel
@@ -167,7 +179,6 @@
             .photo_container
             {
                 background: #000;
-                margin-bottom: 4px;
             }
             
             .photo_image
@@ -175,6 +186,8 @@
                 display: block;
                 margin: 0 auto;
             }
+            
+            figcaption { margin-top: 4px }
             
             article
             {
@@ -196,7 +209,7 @@
                 margin-bottom: 4px;
             }
             
-            .caption { line-height: 14px }
+            figcaption, .caption { line-height: 14px }
             
             blockquote
             {
@@ -263,18 +276,27 @@
             .chat_label { font-weight: bold }
             .audio~.caption, .video~.caption { margin-top: 4px }
 
+            .answer_container
+            {
+                min-height: 24px;
+                padding: 10px;
+            }
+            
+            .answer_container~.answer_container { margin-top: 4px }
+
+            .asker_portrait
+            {
+                float: left;
+                margin-right: 6px;
+            }
+            
+            .answer { margin-top: 4px }
+            
             aside
             {
-                background: {color:Color 2};
-                border-radius: 4px;
-                line-height: 14px;
                 margin-top: 8px;
                 padding: 4px 10px;
                 text-align: right;
-                -moz-transition: background 250ms ease-out;
-                -o-transition: background 250ms ease-out;
-                -webkit-transition: background 250ms ease-out;
-                transition: background 250ms ease-out;
             }
             
             aside:hover { background: {color:Color 4} }
@@ -396,7 +418,6 @@
 {/block:ContentSource}
 
                     <article class="container">
-                        <div>
                             {block:Text}
                                 {block:Title}
                                     <span class="title">{Title}</span>
@@ -407,29 +428,35 @@
                             {/block:Text}
                         
                             {block:Photo}
-                                {LinkOpenTag}
-                                <figure class="photo_container">
-                                    <img src="{PhotoURL-500}" alt="photo_image" class="photo_image">
-                                </figure>
-                                {LinkCloseTag}
-                                {block:Caption}
-                                    <div class="caption">
-                                        {Caption}
+                                <figure>
+                                    <div class="photo_container">
+                                        {LinkOpenTag}
+                                            <img src="{PhotoURL-500}" alt="photo_image" class="photo_image">
+                                        {LinkCloseTag}
                                     </div>
-                                {/block:Caption}
+                                    {block:Caption}
+                                        <figcaption class="caption">
+                                            {Caption}
+                                        </figcaption>
+                                    {/block:Caption}
+                                </figure>
                             {/block:Photo}
                             
                             {block:Photoset}
-                                <figure class="photoset-grid photo_container" data-layout="{PhotosetLayout}">
+                                <figure class="photoset-grid" data-layout="{PhotosetLayout}">
                                     {block:Photos}
-                                        <img src="{PhotoURL-500}" alt="photo_image" class="photo_image">
+                                        <div class="photo_container">
+                                            {LinkOpenTag}
+                                                <img src="{PhotoURL-500}" alt="photo_image" class="photo_image">
+                                            {LinkCloseTag}
+                                        </div>
                                     {/block:Photos}
+                                    {block:Caption}
+                                        <figcaption class="caption">
+                                            {Caption}
+                                        </figcaption>
+                                    {/block:Caption}
                                 </figure>
-                                {block:Caption}
-                                    <div class="caption">
-                                        {Caption}
-                                    </div>
-                                {/block:Caption}
                             {/block:Photoset}
                             
                             {block:Quote}
@@ -491,8 +518,16 @@
                                     </div>
                                 {/block:Caption}
                             {/block:Video}
-                        </div>
-                        <aside>
+                            
+                            {block:Answer}
+                                <p class="container2 answer_container"><img src="{AskerPortraitURL-24}" alt="asker" class="asker_portrait"><strong>{Asker}</strong> asked: {Question}</p>
+                                {block:Answerer}
+                                    <p class="container2 answer_container"><img src="{AnswererPortraitURL-24}" alt="asker" class="asker_portrait"><strong>{Asker}</strong> asked: {Question}</p>
+                                {/block:Answerer}
+                                <p class="answer">{Answer}</p>
+                            {/block:Answer}
+                            
+                        <aside class="container2">
                             <a href="{ShortURL}" class="note_count">{NoteCount} {text:Note Units}</a>
                             <div>
                                 {block:HasTags}
