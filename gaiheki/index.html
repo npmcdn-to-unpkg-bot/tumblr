@@ -21,23 +21,26 @@
 
 <html>
     <head>
-        <title>Title</title>
         <meta charset="UTF-8">
-        <meta name="image:Background" content="" />
-        <meta name="image:Background Footer" content="" />
-        <meta name="image:Avatar" content="" />
-        <meta name="color:Color 1" content="#dce7f8" />
-        <meta name="color:Color 2" content="#bad0f1" />
-        <meta name="color:Color 3" content="#101b2c" />
-        <meta name="color:Color 4" content="#97b8e9" />
-        <meta name="font:Font Family" content="Verdana, Geneva, sans-serif" />
-        <meta name="text:Text 1" content="Text 1" />
-        <meta name="text:Text 2" content="Text 2" />
-        <meta name="text:Note Units" content="notes" />
+        <meta name="image:Background" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAB4AAAAMfCAMAAAAAAzpxAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NDkxMSwgMjAxMy8xMC8yOS0xMTo0NzoxNiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpCMUU3RkUyMjBFRDQxMUU1QTdFRkExNjJDRDczRjRBNiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpCMUU3RkUyMzBFRDQxMUU1QTdFRkExNjJDRDczRjRBNiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkIxRTdGRTIwMEVENDExRTVBN0VGQTE2MkNENzNGNEE2IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkIxRTdGRTIxMEVENDExRTVBN0VGQTE2MkNENzNGNEE2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+N4OCiAAAACpQTFRFAAAAYou+9/f/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">
+        <meta name="image:Background Footer" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAHgCAMAAAACDyzWAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NDkxMSwgMjAxMy8xMC8yOS0xMTo0NzoxNiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo4MjJDREJGNzEwQTYxMUU1QjJFQ0Q0OEREM0JCQTZBOCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo4MjJDREJGODEwQTYxMUU1QjJFQ0Q0OEREM0JCQTZBOCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjgyMkNEQkY1MTBBNjExRTVCMkVDRDQ4REQzQkJBNkE4IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjgyMkNEQkY2MTBBNjExRTVCMkVDRDQ4REQzQkJBNkE4Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+GVXQagAAABtQTFRFb5zWU3WgGyc1N05rDRMaKTpQRWGFYYi7////L54vsQAAAAl0Uk5T//////////8AU094EgAAEFZJREFUeNrsnde2q7gWBYWt0P//xX12NlhpKQNVD/eOsY9tQCrmUsBu9R/ARBRNAAgICAiAgICAAAgICAiAgICAAAgICAiAgICAAAgICAiAgICAAAgICAiAgICAAAgICAiAgICAAAgICAiAgICAAAgICAiAgICAgIAACAgICICAgIAACAgICICAgIAACAgICICAgIAACAgICICAgIAACAgICICAgIAACAgICICAgIAACAgICICAgIAACAgICICAgICAgAAICAgIgICAgAAICAgIgICAgAAICAgIgICAgAAICAgIgICAgAAICAgIgICAgAAICAgIgICAgAAICAgIgICAgAAICAgICAiAgICAAAgICAiAgICAAAgICAiAgICAAAgICAiAgICAAAgICAiAgICAAAgICAiAgICAAAgICAiAgICAAAgICAiAgICAAAgICAgICICAgIAACAgICICAgIAACAgICICAgIAACAgICICAgIAACAgICICAgIAACAgICICAgIAACAgICICAgIAACAgICICAgIAACAgICAgIgICAgAAICAgIgICAgAAICAgIgICAgAAICAgIgIBwXvQHHwJ+/i/AWPseX2itPv+PJoGB+j1eUN8m0iwwQb9fAR8PWgbG6/ciIAZCfx6PsIAYCOP9exUQA2Fw/T0IyEwERgfgTkAiEEYH4F5AIhAGB+BeQCIQ5gpIBMLYCoyAMDUADwJSgwEBAQEBEBAQEGCogMyCoRuahWiY6R8CwtzwYy8YFqq9PA0DMycfCAgr+HdchqEQw1D/fAKiIIwZ/wUFpBjDoAAMCYiBMFdADIQRFTgsIONAGBCAYQGJQJgrIBE4uXp9/4DebQUkAlcYPJ1cQgS8wNBdIyDM7bXTKqg1Al4jNfRJ/dNMQk5ef08ZBz/e6QwD08sw+hLTsfMPm2KT5eIO+hOkXR/vnEsamFiIfjlB1Oi96BILQL+BuqpivR2qhYPvH1ouoNbU5KFl90OAR+6YSFeOmnSXgddDihK8FgOb+qbfXYiPmdIDxUcDU/RQ/0QCDhwIX3rgqY9dnTlk0in9BF3Up5t1ZwH14B66aOYee1rLAkA3CIlOQfPoLOBjcAddczFSH29oWfPrBiGh8/pZWod0dwH1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">
+        <meta name="image:Avatar" content="">
+        <meta name="color:Color 1" content="#dce7f8">
+        <meta name="color:Color 2" content="#bad0f1">
+        <meta name="color:Color 3" content="#101b2c">
+        <meta name="color:Color 4" content="#97b8e9">
+        <meta name="font:Font Family" content="Verdana, Geneva, sans-serif">
+        <meta name="text:Title" content="Untitled">
+        <meta name="text:Text 1" content="Text 1">
+        <meta name="text:Text 2" content="Text 2">
+        <meta name="text:Note Units" content="notes">
+        <title>{text:Title}</title>
+        <link rel="shortcut icon" href="{Favicon}">
+        <link rel="alternate" type="application/rss+xml" href="{RSS}">
+        <link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
         <script src="http://static.tumblr.com/hbypfc2/Je2nq02tu/jquery.min.js"></script>
         <script src="http://static.tumblr.com/wgijwsy/jgemkyt9x/jquery.photoset-grid.min.js"></script>
         <script src="http://static.tumblr.com/hbypfc2/8WVnpqov5/smoothscroll.js"></script>
-        <link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
         <style>
             a,abbr,acronym,address,applet,b,big,blockquote,body,caption,center,cite,code,dd,del,dfn,div,dl,dt,em,fieldset,font,form,h1,h2,h3,h4,h5,h6,html,i,iframe,img,ins,kbd,label,legend,li,object,ol,p,pre,q,s,samp,small,span,strike,strong,sub,sup,table,tbody,td,tfoot,th,thead,tr,tt,u,ul,var{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:0 0}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}:focus{outline:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
             
@@ -98,7 +101,7 @@
 
             #avatar
             {
-                background: url('{image:Avatar}') center center/cover no-repeat;
+                background: #000 url('{image:Avatar}') center center/cover no-repeat;
                 display: block;
                 -ms-interpolation-mode: bicubic;
                 image-rendering: auto;
@@ -264,6 +267,7 @@
             {
                 background: {color:Color 2};
                 border-radius: 4px;
+                line-height: 14px;
                 margin-top: 8px;
                 padding: 4px 10px;
                 text-align: right;
@@ -274,6 +278,7 @@
             }
             
             aside:hover { background: {color:Color 4} }
+            .note_count { display: block }
             
             #pagination
             {
@@ -386,7 +391,7 @@
 {/block:NoRebloggedFrom} -->
 
                 {block:ContentSource}<!-- {SourceURL}
-{block:SourceLogo}<img src="{BlackLogoURL}"width="{LogoWidth}" height="{LogoHeight}" alt="{SourceTitle}" />{/block:SourceLogo}
+{block:SourceLogo}<img src="{BlackLogoURL}"width="{LogoWidth}" height="{LogoHeight}" alt="{SourceTitle}">{/block:SourceLogo}
 {block:NoSourceLogo}{SourceLink}{/block:NoSourceLogo} -->
 {/block:ContentSource}
 
@@ -404,7 +409,7 @@
                             {block:Photo}
                                 {LinkOpenTag}
                                 <figure class="photo_container">
-                                    <img src="{PhotoURL-500}" alt="photo_image" class="photo_image" />
+                                    <img src="{PhotoURL-500}" alt="photo_image" class="photo_image">
                                 </figure>
                                 {LinkCloseTag}
                                 {block:Caption}
@@ -417,7 +422,7 @@
                             {block:Photoset}
                                 <figure class="photoset-grid photo_container" data-layout="{PhotosetLayout}">
                                     {block:Photos}
-                                        <img src="{PhotoURL-500}" alt="photo_image" class="photo_image" />
+                                        <img src="{PhotoURL-500}" alt="photo_image" class="photo_image">
                                     {/block:Photos}
                                 </figure>
                                 {block:Caption}
@@ -437,7 +442,7 @@
                             {block:Link}
                                 <a href="{URL}" {Target} class="link">
                                     {block:Thumbnail}
-                                        <img src="{Thumbnail}" alt="thumbnail" class="link_thumbnail" />
+                                        <img src="{Thumbnail}" alt="thumbnail" class="link_thumbnail">
                                     {/block:Thumbnail}
                                     <span class="link_name">{Name}</span>
                                     {block:Excerpt}
@@ -488,7 +493,14 @@
                             {/block:Video}
                         </div>
                         <aside>
-                            <a href="{ShortURL}">{NoteCount} {text:Note Units}</a>
+                            <a href="{ShortURL}" class="note_count">{NoteCount} {text:Note Units}</a>
+                            <div>
+                                {block:HasTags}
+                                    {block:Tags}
+                                        <a href="{TagURL}" onclick="ajax(event)">#{Tag}</a>
+                                    {/block:Tags}
+                                {/block:HasTags}
+                            </div>
                         </aside>
                     </article>
                 {/block:Posts}
