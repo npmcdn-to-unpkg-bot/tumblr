@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{Title}</title>
+        <meta charset="UTF-8">
+        {block:Description}
+            <meta name="description" content="{MetaDescription}">
+        {/block:Description}
+        <meta name="font:Default Font" content="Arial, Helvetica, sans-serif">
+        <meta name="font:Navigation Font" content="Arial, Helvetica, sans-serif">
+        <meta name="font:Note Count Font" content="Arial, Helvetica, sans-serif">
+        <meta name="image:Logo" content="https://secure.static.tumblr.com/1a815059cf2e85e456a07efecca04148/am8qlrl/jtGnif8l6/tumblr_static_8a8im2k52gowwsccg8ookcw80.png">
+        <link rel="shortcut icon" href="{Favicon}">
+        <link rel="alternate" type="application/rss+xml" href="{RSS}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        {block:IndexPage}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/infinity/0.2.2/infinity.min.js"></script>
+            <script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
+            <script src="https://npmcdn.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
+        {/block:IndexPage}
+        <script src="http://static.tumblr.com/am8qlrl/oeEnjnew5/smoothscroll.min.js"></script>
+        <style>
+            /*
+            * Z-Index Layers
+            *
+            * 102   Ask Module Overlay Form
+            * 101   Ask Module Overlay Background
+            * 100   Ask Module (Visible)                 Loading Indicator
+            * 2     Post Note Count Overlay
+            * 1     Post Note Count Overlay Background
+            * -100  Ask Module (Hidden)
+            */
+        
+            html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{background-color:#ff9;color:#000;text-decoration:none}mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}input,select{vertical-align:middle}
+                
+            main {width: 1024px}
+            #logo {width: 224px}
+            #navigation {font-size: 14px}
+            #navigation a~a {margin-left: 4px}
+            
+            article {
+                font-size: 80px;
+                width: 320px;
+            }
+            
+            a:link, a:visited, a:hover, a:active {
+                color: inherit;
+                text-decoration: none
+            }
+            
+            body
+            {
+                background: #fff;
+                font: 12px {font:Default Font};
+                overflow-x: hidden;
+            }
+            
+            main
+            {
+                margin: 30px auto 300px;
+                {block:IndexPage}
+                    max-width: 1560px;
+                {/block:IndexPage}
+                {block:PermalinkPage}
+                    width: 100%;
+                {/block:PermalinkPage}
+            }
+            
+            header {
+                margin-bottom: 30px;
+            }
+            
+            #logo
+            {
+                display: block;
+                margin: 0 auto 12px;
+                min-width: 216px;
+            }
+            
+            #navigation {
+                text-align: center;
+                -webkit-transition: font-size 250ms ease-out;
+                -moz-transition: font-size 250ms ease-out;
+                -o-transition: font-size 250ms ease-out;
+                transition: font-size 250ms ease-out;
+            }
+            
+            img[alt="logo"] {max-width: 100%}
+            #navigation a {text-transform: lowercase}
+            
+            #navigation a~a {
+                -webkit-transition: margin-left 250ms ease-out;
+                -moz-transition: margin-left 250ms ease-out;
+                -o-transition: margin-left 250ms ease-out;
+                transition: margin-left 250ms ease-out;
+            }
+            
+            #posts {margin: 0 auto}
+
+            article
+            {
+                {block:IndexPage}
+                    margin-bottom: 30px;
+                    -webkit-transition: filter 500ms ease-out, opacity 500ms ease-out;
+                    -moz-transition: filter 500ms ease-out, opacity 500ms ease-out;
+                    -o-transition: filter 500ms ease-out, opacity 500ms ease-out;
+                    transition: filter 500ms ease-out, opacity 500ms ease-out;
+                {/block:IndexPage}
+                {block:PermalinkPage}
+                    margin: 0 auto;
+                    text-align: center;
+                    width: auto !important;
+                {/block:PermalinkPage}
+            }
+            
+            {block:IndexPage}
+                article:not(.photo) {display:none}
+            {/block:IndexPage}
+            
+            {block:PermalinkPage}
+                article > * {display: inline-block}
+            {/block:PermalinkPage}
+
+            {block:IndexPage}
+                span.note-count {
+                    color: #fff;
+                    font-family: {font:Note Count Font};
+                    filter: alpha(opacity=0);
+                    opacity: 0;
+                    pointer-events: none;
+                    position: absolute;
+                    text-align: center;
+                    top: 50%;
+                    -moz-transform: translateY(-50%);
+                    -ms-transform: translateY(-50%);
+                    -o-transform: translateY(-50%);
+                    -webkit-transform: translateY(-50%);
+                    transform: translateY(-50%);
+                    -webkit-transition: filter 250ms ease-out, opacity 250ms ease-out;
+                    -moz-transition: filter 250ms ease-out, opacity 250ms ease-out;
+                    -o-transition: filter 250ms ease-out, opacity 250ms ease-out;
+                    transition: filter 250ms ease-out, opacity 250ms ease-out;
+                    width: 100%;
+                    z-index: 2;
+                }
+                
+                article:hover span.note-count {
+                    filter: alpha(opacity=100);
+                    opacity: 1;
+                }
+                
+                figure.overlay {
+                    background: #000;
+                    filter: alpha(opacity=0);
+                    opacity: 0;
+                    pointer-events: none;
+                    position: absolute;
+                    -webkit-transition: filter 250ms ease-out, opacity 250ms ease-out;
+                    -moz-transition: filter 250ms ease-out, opacity 250ms ease-out;
+                    -o-transition: filter 250ms ease-out, opacity 250ms ease-out;
+                    transition: filter 250ms ease-out, opacity 250ms ease-out;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 1;
+                }
+                
+                article:hover figure.overlay {
+                    filter: alpha(opacity=60);
+                    opacity: 0.6 !important;
+                }
+                
+                .permalink {
+                    display: block;
+                    text-align: center;
+                    width: 100%;
+                }
+            {/block:IndexPage}
+            
+            article img~img {margin-top: 4px}
+
+            article.photo img
+            {
+                background: #fff;
+                vertical-align: middle;
+                max-width: 100%;
+            }
+            
+            {block:PermalinkPage}
+                div.photoset {max-width: 500px}
+
+                #caption
+                {
+                    font-size: 12px;
+                    margin-left: 10px;
+                    text-align: left;
+                    width: 300px;
+                    vertical-align: top;
+                }
+                
+                #caption > div, #caption > span, #caption > section
+                {
+                    background: #f6f6f6;
+                    color: #000;
+                    display: block;
+                    margin-bottom: 4px;
+                    padding: 10px;
+                }
+                
+                #reblogged {text-align: center}
+                #reblogged a {font-weight: bold}
+                
+                #notes ol.notes
+                {
+                    list-style-type: none;
+                    text-align: center;
+                }
+                
+                #notes li:not(.more_notes_link_container)
+                {
+                    display: inline-block;
+                    margin: 1px;
+                }
+                
+                #notes img.avatar
+                {
+                    width: 24px;
+                    height: 24px;
+                }
+    
+                #notes li.more_notes_link_container
+                {
+                    display: block;
+                    font-size: 10px;
+                    margin-top: 2px;
+                }
+    
+                blockquote
+                {
+                    border-left: 1px solid #d6d6d6;
+                    margin: 4px 0 4px 6px;
+                    padding: 1px 0 1px 10px;
+                }
+                
+                p {line-height: 16px}
+                p~p {margin-top: 10px}
+                pre {white-space: normal}
+            {/block:PermalinkPage}
+            
+            {block:AskEnabled}
+                #ask {cursor: pointer}
+            
+                #ask-module {
+                    filter: alpha(opacity=0);
+                    opacity: 0;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    z-index: -100;
+                }
+                
+                #ask-form {
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    -moz-transform: translate(-50%,-50%);
+                    -ms-transform: translate(-50%,-50%);
+                    -o-transform: translate(-50%,-50%);
+                    -webkit-transform: translate(-50%,-50%);
+                    transform: translate(-50%,-50%);
+                    width: 400px;
+                    height: 250px;
+                    z-index: 102;
+                }
+                
+                #overlay
+                {
+                    background: #000;
+                    filter: alpha(opacity=50);
+                    opacity: 0.5;
+                    height: 100%;
+                    z-index: 101;
+                }
+            {/block:AskEnabled}
+            
+            #loading-indicator
+            {
+                background: #ff3399;
+                opacity: 0;
+                position: fixed;
+                -webkit-transition: opacity 500ms ease, bottom 500ms ease;
+                -moz-transition: opacity 500ms ease, bottom 500ms ease;
+                -o-transition: opacity 500ms ease, bottom 500ms ease;
+                transition: opacity 500ms ease, bottom 500ms ease;
+                bottom: -48px;
+                width: 100%;
+                height: 6%;
+                z-index: 100;
+            }
+            
+            #loading-indicator-image
+            {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                -moz-transform: translate(-50%,-50%);
+                -ms-transform: translate(-50%,-50%);
+                -o-transform: translate(-50%,-50%);
+                -webkit-transform: translate(-50%,-50%);
+                transform: translate(-50%,-50%);
+                height: 92%;
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+#posts,
+article.photo {
+  -webkit-transition-duration: 0.7s;
+     -moz-transition-duration: 0.7s;
+      -ms-transition-duration: 0.7s;
+       -o-transition-duration: 0.7s;
+          transition-duration: 0.7s;
+}
+
+#posts {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+article.photo {
+  -webkit-transition-property: left, right, top, opacity;
+     -moz-transition-property: left, right, top, opacity;
+      -ms-transition-property: left, right, top, opacity;
+       -o-transition-property: left, right, top, opacity;
+          transition-property: left, right, top, opacity;
+}
+        </style>
+    </head>
+
+    <body>
+        <main id="main">
+            <header>
+                <nav id="navigation">
+                    <a href="/" id="logo">
+                        <img src="{image:Logo}" alt="logo">
+                    </a>
+                    {block:AskEnabled}
+                        <a id="ask" onclick="askOpen()">{AskLabel}</a>
+                    {/block:AskEnabled}
+                    {block:HasPages}
+                        {block:Pages}
+                            <a href="{URL}">{Label}</a>
+                        {/block:Pages}
+                    {/block:HasPages}
+                    <a href="/archive">archive</a>
+                </nav>
+            </header>
+            <section id="posts">
+                {block:Posts}
+                    <article class="{PostType}">
+                        {block:IndexPage}
+                            <span class="note-count">{NoteCount}</span>
+                            <figure class="overlay"></figure>
+                            <a href="{Permalink}" target="_blank" class="permalink">
+                        {/block:IndexPage}
+                            {block:Photo}
+                                <img src="{PhotoURL-500}" alt="image">
+                            {/block:Photo}
+                            
+                            {block:Photoset}
+                                <div class="photoset" data-id="photoset{PostID}">
+                                    {block:Photos}
+                                        <img src="{PhotoURL-500}" alt="image">
+                                    {/block:Photos}
+                                </div>
+                            {/block:Photoset}
+                            
+                            {block:Video}
+                                {VideoEmbed-500}
+                            {/block:Video}
+                        {block:IndexPage}
+                            </a>
+                        {/block:IndexPage}
+                        {block:PermalinkPage}
+                            <section id="caption">
+                                {block:Caption}
+                                    <div>
+                                        {Caption}
+                                    </div>
+                                {block:Caption}
+                                {block:RebloggedFrom}
+                                    <span id="reblogged">(via <a href="{ReblogParentURL}">{ReblogParentName}</a>{block:ContentSource}, source <a href="{SourceURL}">{SourceTitle}</a>{/block:ContentSource})</span>
+                                {/block:RebloggedFrom}
+                                {block:PostNotes}
+                                    <section id="notes">
+                                        {PostNotes-64}
+                                    </section>
+                                {/block:PostNotes}
+                            </section>
+                        {/block:PermalinkPage}
+                    </article>
+                {/block:Posts}
+            </section>
+        </main>
+        {block:IndexPage}
+            <aside id="aside">
+                {block:AskEnabled}
+                    <section id="ask-module">
+                        <iframe src="http://www.tumblr.com/ask_form/{Name}.tumblr.com" id="ask-form"></iframe>
+                        <figure id="overlay" onclick="askClose()"></figure>
+                    </section>
+                {/block:AskEnabled}
+                <figure id="loading-indicator">
+                    <svg id="loading-indicator-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="uil-facebook"><g transform="translate(20 50)"><rect x="-10" y="-30" width="20" height="60" fill="#ffffff" opacity="0.6"><animateTransform attributeName="transform" type="scale" from="2" to="1" begin="0s" repeatCount="indefinite" dur="1s" calcMode="spline" keySplines="0.1 0.9 0.4 1" keyTimes="0;1" values="2;1"></animateTransform></rect></g><g transform="translate(50 50)"><rect x="-10" y="-30" width="20" height="60" fill="#ffffff" opacity="0.8"><animateTransform attributeName="transform" type="scale" from="2" to="1" begin="0.1s" repeatCount="indefinite" dur="1s" calcMode="spline" keySplines="0.1 0.9 0.4 1" keyTimes="0;1" values="2;1"></animateTransform></rect></g><g transform="translate(80 50)"><rect x="-10" y="-30" width="20" height="60" fill="#ffffff" opacity="0.9"><animateTransform attributeName="transform" type="scale" from="2" to="1" begin="0.2s" repeatCount="indefinite" dur="1s" calcMode="spline" keySplines="0.1 0.9 0.4 1" keyTimes="0;1" values="2;1"></animateTransform></rect></g></svg>
+                </figure>
+            </aside>
+        {/block:IndexPage}
+        <script>
+            {block:IndexPage}
+                // Global Variables
+            
+                var loadingIndicator       = document.getElementById("loading-indicator");
+                var winH                   = $(window).height();
+                var $main                  = $( document.getElementById("main") );
+                var $posts                 = $( document.getElementById("posts") );
+                var $aside                 = $( document.getElementById("aside") );
+//                var infinity               = new infinity.ListView($posts);
+                var page                   = 1;
+                var preventLoading         = false;
+                var loadingIndicatorHeight = document.documentElement.clientHeight * 0.06;
+
+                // Functions
+                
+                function toggleLoadingIndicator(boolean) {
+                    if(boolean)
+                    {
+                        loadingIndicator.style.opacity = 1;
+                        loadingIndicator.style.bottom  = 0;
+                        return;
+                    }
+                    
+                    if(!boolean)
+                    {
+                        loadingIndicator.style.opacity = 0;
+                        loadingIndicator.style.bottom  = "-" + loadingIndicator.offsetHeight + "px";
+                        return;
+                    }
+                }
+                
+                function loadPosts() {
+                    $.get( "/page/" + ++page, function(data) {
+                        history.pushState(null, null, "/page/" + page);
+                        var newPosts = $(data).find('#posts .photo');
+
+//                        var newClass = " page-" + page;
+                        
+//                        for(var i = 0; i < newPosts.length; i++)
+//                            newPosts[i].className += newClass;
+
+                        $(newPosts).imagesLoaded(function() {
+                            $posts.masonry('appended', newPosts);
+                            //infinity.append( $('.page-2') );
+                            preventLoading = false;
+                            toggleLoadingIndicator(false);
+                        });
+                    });
+                }
+                
+                // Main
+                
+                $posts.imagesLoaded(function() {
+                    $posts.masonry({
+                        gutter: 30,
+                        "isFitWidth": true,
+                        itemSelector: '.photo',
+                        transitionDuration: 0
+                    });
+                });
+                
+                $(window).scroll(function(event) {
+                    var scroll = $(window).scrollTop();
+                    
+                    if( (!preventLoading) && ( (scroll + winH + 256) >= $(document).height() ) )                     {
+                        preventLoading = true;
+                        toggleLoadingIndicator(true);
+                        loadPosts();
+                    }
+                });
+            {/block:IndexPage}
+            
+            {block:PermalinkPage}
+                var $more = $('li.more_notes_link');
+            
+                function tumblrNotesInserted() {
+                    $('#notes span.action').remove();
+                    $('li.with_commentary').empty();
+                    $more.text("(more notes)");
+                }
+                
+                tumblrNotesInserted();
+            {/block:PermalinkPage}
+            
+            {block:AskEnabled}
+                var $askModule = $( document.getElementById("ask-module") ).css("height", window.screen.height),
+                    asking = false;
+                
+                function askOpen() {
+                    if(!asking) {
+                        asking = true;
+                        
+                        $askModule
+                            .css("z-index", 100)
+                            .animate({
+                                "filter": "alpha(opacity=100)",
+                                "opacity": 1
+                            }, 250);
+                    }
+                }
+                
+                function askClose() {
+                    asking = false;
+                    
+                    $askModule.animate({
+                        "filter": "filter: alpha(opacity=0)",
+                        "opacity": 0,
+                        "z-index": -100
+                    }, 250);
+                }
+            {/block:AskEnabled}
+        </script>
+    </body>
+</html>
