@@ -437,7 +437,7 @@ article.photo {
                 var $main                  = $( document.getElementById("main") );
                 var $posts                 = $( document.getElementById("posts") );
                 var $aside                 = $( document.getElementById("aside") );
-//                var infinity               = new infinity.ListView($posts);
+                var infinity               = new infinity.ListView($posts);
                 var page                   = 1;
                 var preventLoading         = false;
                 var loadingIndicatorHeight = document.documentElement.clientHeight * 0.06;
@@ -459,20 +459,15 @@ article.photo {
                         return;
                     }
                 }
-                
+
                 function loadPosts() {
                     $.get( "/page/" + ++page, function(data) {
                         history.pushState(null, null, "/page/" + page);
                         var newPosts = $(data).find('#posts .photo');
 
-//                        var newClass = " page-" + page;
-                        
-//                        for(var i = 0; i < newPosts.length; i++)
-//                            newPosts[i].className += newClass;
-
                         $(newPosts).imagesLoaded(function() {
+                            infinity.append(newPosts);
                             $posts.masonry('appended', newPosts);
-                            //infinity.append( $('.page-2') );
                             preventLoading = false;
                             toggleLoadingIndicator(false);
                         });
